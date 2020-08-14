@@ -1,24 +1,21 @@
-package com.tdc.cleancode.lambda_expressions.before;
+package com.tdc.cleancode.lambda_expressions.after;
 
 import com.tdc.cleancode.Employee;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class ComparationJava7 {
-
-    public void nameComparationJava7(){
-        List<Employee> employees = new ArrayList<>();
+public class ComparationIntermediate {
+    public void nameComparation(){
+         List<Employee> employees = new ArrayList<>();
 
         this.setEmployees(employees);
 
-        Collections.sort(employees, new Comparator<Employee>() {
-                @Override
-                public int compare(Employee employee1, Employee employee2) {
-                    return employee1.getName().compareTo(employee2.getName());
-                }
-            });
+        Collections.sort(employees, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
         System.out.println(employees.toString());
     }
+
 
     private void setEmployees(List<Employee> employees){
 
@@ -48,7 +45,7 @@ public class ComparationJava7 {
     }
 
     public static void main(String[] args) {
-        ComparationJava7 comparationJava7 = new ComparationJava7();
-        comparationJava7.nameComparationJava7();
+        Comparation comparation = new Comparation();
+        comparation.nameComparation();
     }
 }
