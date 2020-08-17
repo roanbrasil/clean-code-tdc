@@ -1,15 +1,16 @@
 package com.tdc.cleancode.dto;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
-public class Employee {
+public class EmployeeWithOptional {
 
     private String name;
     private String age;
     private BigDecimal salary;
-    private Address address;
+    private AddressWithOptional address;
 
-    public Employee() {
+    public EmployeeWithOptional() {
     }
 
     public String getName() {
@@ -36,17 +37,17 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<AddressWithOptional> getAddress() {
+        return Optional.ofNullable(address);
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressWithOptional address) {
         this.address = address;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EmployeeWithOptional{" +
                 "name='" + name + '\'' +
                 ", age='" + age + '\'' +
                 ", salary='" + salary + '\'' +

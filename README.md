@@ -17,6 +17,10 @@
 ## CompletableFuture API Improvements  1.8 -
 
 ## Optional Class Improvements 1.8 
+Antes do Optional, era necessário escrever muitas validações para validar se o código era nulo ou não, e mesmo assim ainda
+esquecíamos de fazer gerando um NullPointerException em nosso código. O Optional<T> é uma classe que faz parte do pacote java.util, sendo um classe value-based.
+Ela pode ter em sua instância apenas 2 estados, um deles vazio ou um instância do tipo T. Instâncias optionais são finais e imutáveis, entretanto a referencia de T pode ser mutável.
+
 
 ## Local-Variable Type Inference - JEP 286
 ###Link : https://openjdk.java.net/jeps/286

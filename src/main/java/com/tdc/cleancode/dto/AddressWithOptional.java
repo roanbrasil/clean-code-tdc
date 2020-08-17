@@ -1,14 +1,16 @@
 package com.tdc.cleancode.dto;
 
-public class Address {
+import java.util.Optional;
+
+public class AddressWithOptional {
 
     private String street;
     private String number;
     private String complement;
     private String postalCode;
-    private City city;
+    private CityWithOptional city;
 
-    public Address() {
+    public AddressWithOptional() {
     }
 
     public String getStreet() {
@@ -35,11 +37,11 @@ public class Address {
         this.complement = complement;
     }
 
-    public City getCity() {
-        return city;
+    public Optional<CityWithOptional> getCity() {
+        return Optional.ofNullable(city);
     }
 
-    public void setCity(City city) {
+    public void setCity(CityWithOptional city) {
         this.city = city;
     }
 
@@ -53,7 +55,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "AddressWithOptional{" +
                 "street='" + street + '\'' +
                 ", number='" + number + '\'' +
                 ", complement='" + complement + '\'' +
