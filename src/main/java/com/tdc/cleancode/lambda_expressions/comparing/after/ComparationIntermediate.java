@@ -1,18 +1,18 @@
-package com.tdc.cleancode.lambda_expressions.after;
+package com.tdc.cleancode.lambda_expressions.comparing.after;
 
-import com.tdc.cleancode.Employee;
+import com.tdc.cleancode.dto.Employee;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-
-public class Comparation {
+public class ComparationIntermediate {
     public void nameComparation(){
-        List<Employee> employees = new ArrayList<>();
+         List<Employee> employees = new ArrayList<>();
 
         this.setEmployees(employees);
 
-        Collections.sort(employees, Comparator.comparing(Employee::getName));
-
+        Collections.sort(employees, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
         System.out.println(employees.toString());
     }
 

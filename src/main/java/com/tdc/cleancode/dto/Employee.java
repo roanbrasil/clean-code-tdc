@@ -1,4 +1,4 @@
-package com.tdc.cleancode;
+package com.tdc.cleancode.dto;
 
 public class Employee {
 

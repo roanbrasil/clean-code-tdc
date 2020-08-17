@@ -1,6 +1,6 @@
-package com.tdc.cleancode.lambda_expressions.before;
+package com.tdc.cleancode.lambda_expressions.comparing.before;
 
-import com.tdc.cleancode.Employee;
+import com.tdc.cleancode.dto.Employee;
 
 import java.util.*;
 
