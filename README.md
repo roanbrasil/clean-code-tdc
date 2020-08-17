@@ -6,7 +6,26 @@
  
 ## Java Stream API for Bulk Data Operations on Collections
 
-## Java Time API - Retorno da semântica com DDD .now() example, tipos, mês é enum ao invés de inteiro antes era 0-11, é imutável.
+## Java Time API - JEP 150 / JSR 310
+###Link : https://openjdk.java.net/jeps/150
+###Released Version: 8
+Antigamente, trabalhar com Datas em java era uma tarefa árdua. Muitas vezes precisávamos importar bibliotecas externas para facilitar a nossa vida.
+Se voltarmos antes do Java 8, podemos nos recordar de que a parte de biblioteca era composto de 3 classes localizadas no pacote java.util : São elas, Date, Calendar e Timezone.
+Com o Java 8, foi adicionado o pacote java.time e com isso surgiram algumas vantagens, conforme mencionado abaixo.
+1. Facilidade de entendê-la. 
+2. Flexibilidade 
+    * com a chegada dessa nova API, existe a possibilidade de trabalhar com diveros tipos de data e tempo.
+3. Imutabilidade e Thread-Safety 
+    * Os métodos invocados nunca modificam o estado original do objeto, sempre geram uma nova cópia do mesmo ao ser retornado.
+    * A biblioteca antiga, não era thread-safety, isso possibilitava a inclusão de diversos bugs quando precisava ter concorrência.
+4. Método em cadeia
+    * Os métodos mutáveis pode ser aninhados em cadeia permitindo qualquer manipulação de dados de forma bem simples.
+    
+Houve retorno da semântica com DDD, um clássico exemplo é LocalDate.now().
+Antigamente, o mês não era enum, como hoje, ao invés disso, tínhamos inteiro antes era 0-11 e tínhamos que ficar parando e vendo que mês era.
+
+
+
 
 ## Collection API improvements
 
@@ -16,11 +35,14 @@
 
 ## CompletableFuture API Improvements  1.8 -
 
-## Optional Class Improvements 1.8 
+## Optional Class Improvements 1.8
 Antes do Optional, era necessário escrever muitas validações para validar se o código era nulo ou não, e mesmo assim ainda
 esquecíamos de fazer gerando um NullPointerException em nosso código. O Optional<T> é uma classe que faz parte do pacote java.util, sendo um classe value-based.
 Ela pode ter em sua instância apenas 2 estados, um deles vazio ou um instância do tipo T. Instâncias optionais são finais e imutáveis, entretanto a referencia de T pode ser mutável.
 
+###Referências:
+https://www.oracle.com/technical-resources/articles/java/java8-optional.html
+https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html
 
 ## Local-Variable Type Inference - JEP 286
 ###Link : https://openjdk.java.net/jeps/286
