@@ -1,13 +1,12 @@
-package com.tdc.cleancode;
+package com.tdc.cleancode.dto;
 
 public class Address {
 
     private String street;
     private String number;
     private String complement;
-    private String city;
-    private String province;
     private String postalCode;
+    private City city;
 
     public Address() {
     }
@@ -36,20 +35,12 @@ public class Address {
         this.complement = complement;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
     }
 
     public String getPostalCode() {
@@ -67,7 +58,6 @@ public class Address {
                 ", number='" + number + '\'' +
                 ", complement='" + complement + '\'' +
                 ", city='" + city + '\'' +
-                ", province='" + province + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 '}';
     }
