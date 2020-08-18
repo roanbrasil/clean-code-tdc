@@ -58,7 +58,19 @@ Antigamente, o mês não era enum, como hoje, ao invés disso, tínhamos inteiro
 
 ## Private methods in Interfaces - Paula
 
-## CompletableFuture API Improvements  1.8 -
+## CompletableFuture API - JEP 266
+###Link: https://openjdk.java.net/jeps/266
+Desde a chegada de processadores multicore, começaram a serem exploradas maneiras de construir aplicações que possa
+explorar esses processadores multicore. Assim como o parallel streams que nasceu no java 8 permite executar esse paralelismo de maneira simples,
+evitando que trabalhe diretamente com threads e possa paralelizar sua aplicação.
+Com o surgimento de microsserviços, onde sua adoção tem aumentado muito nas grandes empresas, essa API nasceu para ser utilizada em aplicações voltadas 
+a serviços/apis que estão na grande rede (Internet). Então afim de evitar bloquear seus recursos computacionais, a API de CompletableFuture foi criada afim de trabalhar de forma assíncrona.
+Escrever um código limpo de forma assíncrono, faz dessa lib ideal para utilizar em seu projeto nos dias atuais.
+
+Syntax:
+```
+public class CompletableFuture<T> extends Object implements Future<T>, CompletionStage<T>
+```
 
 ## Optional Class Improvements 1.8
 Antes do Optional, era necessário escrever muitas validações para validar se o código era nulo ou não, e mesmo assim ainda
