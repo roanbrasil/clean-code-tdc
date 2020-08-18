@@ -29,7 +29,8 @@ https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.htm
 
 ##  default and static methods in Interfaces - Paula
  
-## Java Stream API for Bulk Data Operations on Collections
+## Java Stream API for Bulk Data Operations on Collections - JEP 107s
+###Link: https://openjdk.java.net/jeps/107
 
 ## Java Time API - JEP 150 / JSR 310
 ###Link : https://openjdk.java.net/jeps/150
@@ -53,6 +54,17 @@ Antigamente, o mês não era enum, como hoje, ao invés disso, tínhamos inteiro
 
 
 ## Collection API improvements
+Alguns métodos adicionados a Collection API para facilitar e utilizarmos com streamAPI.
+Alguns deles são:
+* forEach()
+* replaceAll()
+* compute()
+* merge ()
+* Collection -  default method - removeIf(Predicate filter) que remove todos elementos da coleção que tem a condição de predicate válida.
+* Collection spliterator() esse método pode ser utilizado para atravessar elementos sequencialmente ou em paralelo.
+
+
+Houve também melhoras na performance da classe HashMap afim de evitar colisões de chaves.
 
 ## Factory Methods for Immutable List, Set, Map and Map.Entry - Paula
 
