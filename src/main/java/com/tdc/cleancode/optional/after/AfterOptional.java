@@ -1,7 +1,6 @@
 package com.tdc.cleancode.optional.after;
 
 import com.tdc.cleancode.dto.*;
-import com.tdc.cleancode.optional.before.BeforeOptional;
 
 import java.math.BigDecimal;
 import java.util.Optional;

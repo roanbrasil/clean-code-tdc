@@ -1,23 +1,25 @@
-package com.tdc.cleancode.lambda_expressions.comparing.after;
+package com.tdc.cleancode.functional_interface_and_lambda_expressions.comparing.before;
 
 import com.tdc.cleancode.dto.Employee;
 
 import java.math.BigDecimal;
 import java.util.*;
 
+public class ComparationJava7 {
 
-public class Comparation {
-    public void nameComparation(){
+    public void nameComparationJava7(){
         List<Employee> employees = new ArrayList<>();
 
         this.setEmployees(employees);
 
-        //method reference
-        Collections.sort(employees, Comparator.comparing(Employee::getName));
-
+        Collections.sort(employees, new Comparator<Employee>() {
+                @Override
+                public int compare(Employee employee1, Employee employee2) {
+                    return employee1.getName().compareTo(employee2.getName());
+                }
+            });
         System.out.println(employees.toString());
     }
-
 
     private void setEmployees(List<Employee> employees){
 
@@ -47,7 +49,7 @@ public class Comparation {
     }
 
     public static void main(String[] args) {
-        Comparation comparation = new Comparation();
-        comparation.nameComparation();
+        ComparationJava7 comparationJava7 = new ComparationJava7();
+        comparationJava7.nameComparationJava7();
     }
 }

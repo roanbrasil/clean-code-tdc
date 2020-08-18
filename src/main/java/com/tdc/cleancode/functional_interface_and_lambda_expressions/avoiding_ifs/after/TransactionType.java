@@ -1,10 +1,9 @@
-package com.tdc.cleancode.lambda_expressions.avoiding_ifs.after;
+package com.tdc.cleancode.functional_interface_and_lambda_expressions.avoiding_ifs.after;
 
 import com.tdc.cleancode.dto.Account;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.math.BigDecimal;
-import java.util.function.BiConsumer;
 
 
 public enum TransactionType {

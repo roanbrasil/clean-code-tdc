@@ -1,4 +1,4 @@
-package com.tdc.cleancode.lambda_expressions.avoiding_ifs.withswitch;
+package com.tdc.cleancode.functional_interface_and_lambda_expressions.avoiding_ifs.withswitch;
 
 import com.tdc.cleancode.dto.Account;
 

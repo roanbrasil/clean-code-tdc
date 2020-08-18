@@ -17,6 +17,17 @@ Item do Clean Code que converge com esta feature:
 Capítulo 17 : Cheiros e Heurísticas - G5: Duplicação, G13: Acoplamento Artificial
 
 ## Functional Interfaces and Lambda Expressions
+Functional Interfaces ou somente interfaces funcionais, são interfaces que possuem apenas um único método abstrato.
+Se tiver a necessidade de ter outro método, ele não deve ser abstrato afim de manter a sua caraterística como interface funcional.
+A anotação @FunctionalInterface não é obrigatório, apenas é obrigatório manter a característica de uma interface funcional.
+Para isso, veremos na sessão anterior o default e static methods em interfaces. 
+Alguns exemplos de Interfaces Funcionais são Function, Supplier, Consumer, Predicate, Callable, Runnable e etc.
+Já Lambdas Expressions representam a instância de uma interface funcional.
+
+###Referências
+https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
+
+##  default and static methods in Interfaces - Paula
  
 ## Java Stream API for Bulk Data Operations on Collections
 
@@ -44,19 +55,8 @@ Antigamente, o mês não era enum, como hoje, ao invés disso, tínhamos inteiro
 ## Collection API improvements
 
 ## Factory Methods for Immutable List, Set, Map and Map.Entry - Paula
-###Link: https://openjdk.java.net/jeps/269
-Esta feature foi motiva para evitar a verbosidade e complexidade para a criação de pequenas coleções não modificáveis.
 
-
-## Private methods in Interfaces - JEP 213
-###Link: https://openjdk.java.net/jeps/213
-Este método deve possui implementação, não deve ser herdado.
-Com as melhorias que surgiram no Java 8 para o uso de interface permitiu implementação em interfaces.
-Em alguns casos de implementações auxiliares não devem ser acessíveis para clientes dequela interface.
-
-Item do Clean Code que converge com esta feature:
-Capítulo 3 - Funções
-
+## Private methods in Interfaces - Paula
 
 ## CompletableFuture API Improvements  1.8 -
 
@@ -78,8 +78,7 @@ Esta feture permite tornar o código mais conciso e legível.
 O objetivo dessa feature é que o uso correto de nomes nas variáveis locais torne mais uma boa prática do que a declaração de seus tipos.
 Seguindo o principio de design o uso da inferência de tipos esta apenas para detalhes de implementação.
 
-Item do Clean Code que converge com esta feature:
-Capitulo 2 - Nomes significativos 
+
 
 ## Records (Preview) – JEP 359 
 ###Link : https://openjdk.java.net/jeps/359
@@ -91,8 +90,8 @@ Fora a quantidade de código que teremos para leitura e entendimento em casos de
 Linguagens como Kotlin, Scala e C# possuem tipos com esse mesmo propósito e serviu como exemplo para a implementação desta feature no Java.
 Além disso o tipo Record cria por default uma classe imutável, visto que o código compilado gera uma classe final com atributos final.
 Este tipo tem suas restrições: Não permite novos atributos e construtores e não é permitido estender uma classe que seja do tipo Record.
-
 Item do Clean Code que converge com esta feature:
+
 Capitulo 6 - Objetos e Estrutura de Dados.
 Capítulo 17 - Cheiros e Heurísticas - Subitem G5 - Duplicação
 
