@@ -3,11 +3,11 @@ package com.tdc.cleancode.functional_interface_and_lambda_expressions.lambda.vis
 import java.util.function.Function;
 
 @FunctionalInterface
-public interface Executor<T> {
+public interface Executor<T, R> {
 
-    Class<?> type();
+    Class<T> type();
 
-    default TypeConverter<T> execute(Function<Object, T> function){
+    default TypeConverter<T, R> execute(Function<T, R> function){
         return  visitorBuilder -> visitorBuilder.register(type(), function);
     }
 }

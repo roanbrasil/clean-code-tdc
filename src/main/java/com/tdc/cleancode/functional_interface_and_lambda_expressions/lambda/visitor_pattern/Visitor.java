@@ -6,17 +6,23 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 @FunctionalInterface
-public interface Visitor<T> {
+public interface Visitor<R> {
 
-    T visit(Object o);
+    R visit(Object o);
 
-    static <T> Executor<T> forType(Class<?> type) {
+    static <T, R> Executor<T, R> forType(Class<T> type) {
         return () -> type;
     }
 
-    static <T> Visitor<T> of(Consumer<VisitorBuilder<T>> consumer){
-        Map<Class<?>, Function<Object, T>> registry = new HashMap<>();
-        consumer.accept((type, function) -> registry.put(type, function));
+    static <R> Visitor<R> of(Consumer<VisitorBuilder<R>> consumer){
+        Map<Class<?>, Function<Object, R>> registry = new HashMap<>();
+        VisitorBuilder<R> visitorBuilder = new VisitorBuilder<R>() {
+            @Override
+            public <T> void register(Class<T> type, Function<T, R> function) {
+               registry.put(type, function.compose(type::cast));
+            }
+        };
+        consumer.accept(visitorBuilder);
         System.out.println("Register: " + registry.keySet());
         return o -> registry.get(o.getClass()).apply(o);
     }

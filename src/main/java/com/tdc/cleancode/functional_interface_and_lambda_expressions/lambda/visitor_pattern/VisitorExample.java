@@ -16,7 +16,7 @@ public class VisitorExample {
         Wheel wheel = new Wheel();
 
         Consumer<VisitorBuilder<String>> consumer =
-                Visitor.<String>forType(Car.class).execute(c ->  "Visiting car: " + c)
+                Visitor.<Car, String>forType(Car.class).execute(c ->  "Visiting car: " + c)
                         .forType(Engine.class).execute(e ->  "Visiting engine: " + e)
                         .forType(Body.class).execute(b -> "Visiting body: " + b)
                         .forType(Wheel.class).execute(w -> "Visiting wheel: " + w);

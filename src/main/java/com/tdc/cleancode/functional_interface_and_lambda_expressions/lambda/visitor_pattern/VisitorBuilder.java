@@ -3,7 +3,7 @@ package com.tdc.cleancode.functional_interface_and_lambda_expressions.lambda.vis
 import java.util.function.Function;
 
 @FunctionalInterface
-public interface VisitorBuilder<T> {
+public interface VisitorBuilder<R> {
 
-    void register(Class<?> type, Function<Object, T> function);
+   <T> void register(Class<T> type, Function<T, R> function);
 }

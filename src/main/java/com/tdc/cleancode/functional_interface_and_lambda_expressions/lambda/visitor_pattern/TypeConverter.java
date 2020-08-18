@@ -2,13 +2,13 @@ package com.tdc.cleancode.functional_interface_and_lambda_expressions.lambda.vis
 
 import java.util.function.Consumer;
 
-public interface TypeConverter<T> extends Consumer<VisitorBuilder<T>> {
+public interface TypeConverter<T, R> extends Consumer<VisitorBuilder<R>> {
 
-    default ChainExecutor<T> forType(Class<?> type){
+    default <T> ChainExecutor<T, R> forType(Class<T> type){
         return index -> index == 0 ? this : type;
     }
 
-    default TypeConverter<T> andThen(TypeConverter<T> after){
+    default TypeConverter<T, R> andThen(TypeConverter<T, R> after){
         return t -> { this.accept(t); after.accept(t);};
     }
 }
