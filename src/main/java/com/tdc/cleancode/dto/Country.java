@@ -1,6 +1,12 @@
 package com.tdc.cleancode.dto;
 
 public class Country {
+    public Country() {
+    }
+
+    public Country(String name) {
+        this.name = name;
+    }
 
     private String name;
 
