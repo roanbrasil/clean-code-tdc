@@ -1,4 +1,4 @@
-package com.tdc.cleancode.stream_api.collection;
+package com.tdc.cleancode.stream_api;
 
 import java.util.Arrays;
 import java.util.List;
