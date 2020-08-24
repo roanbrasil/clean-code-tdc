@@ -1,0 +1,17 @@
+{
+  "paymentMethod":"CREDIT_CARD",
+  "debitList":[
+    {
+      "paymentType":"INSTALLMENT",
+      "amountDue":"100.00",
+      "totalAmountDue":"1000.00",
+      "totalAmountSpent":"2000.00"
+    },
+    {
+      "paymentType":"CASH_VALUE",
+      "amountDue":"200.00",
+      "totalAmountDue":"200.00",
+      "totalAmountSpent":"200.00"
+    }
+  ]
+}

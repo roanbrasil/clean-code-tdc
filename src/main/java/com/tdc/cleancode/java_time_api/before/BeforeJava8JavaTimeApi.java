@@ -3,7 +3,6 @@ package com.tdc.cleancode.java_time_api.before;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 public class BeforeJava8JavaTimeApi {
 
@@ -31,12 +30,6 @@ public class BeforeJava8JavaTimeApi {
         now.set(Calendar.SECOND, 0);
         now.set(Calendar.MILLISECOND, 0);
         return now.getTime();
-    }
-
-    public Date timezoneConversion(){
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
-        return calendar.getTime();
     }
 
     public long spanBetweenTimes(){
