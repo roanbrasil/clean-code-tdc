@@ -21,13 +21,13 @@ public class ComplexMapperCleanCode {
 
         final List<Complex> complexList = response.getComplexGroupList().get(0).getComplexList();
 
-        final List<Complex> complexListFiltered = complexList
+        final List<Complex> complexListFilteredByPaymentMethod = complexList
                 .stream()
                 .filter(complexFilterByPaymentMethod(paymentMethodToSearch))
                 .collect(Collectors.toList());
 
 
-        complexListFiltered
+        complexListFilteredByPaymentMethod
                 .forEach(complex -> fillPayment(payment, complex));
 
         return payment;
@@ -51,7 +51,7 @@ public class ComplexMapperCleanCode {
 
         payment.getDebitList().add(debit);
     }
-    
+
     private SimpleValue getCurrentPaymentMethod(Complex complex){
         return complex.getComplexDomainStructure().getSimpleValueList()
                 .stream()
