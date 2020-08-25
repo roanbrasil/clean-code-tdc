@@ -6,7 +6,9 @@ import java.util.List;
 
 public class ListExample {
 
-        public void replaceAllListToUpperCase() {
+  public static final String EMPTY = "";
+
+  public void replaceAllListToUpperCase() {
 
             List<String> countryList = Arrays.asList(
                     "Canada", "Nova Zelandia", "Australia", "United States", "China", "Brazil");
@@ -21,7 +23,7 @@ public class ListExample {
             List<String> carList = Arrays.asList(
                     "Sportage", null, "Ferrari", "Beetle", null, "Porsche");
 
-            carList.replaceAll(s -> s == null ? "" : s);
+            carList.replaceAll(car -> car == null ? EMPTY : car);
 
             System.out.println("Replace Null Values To Empty Values: " + carList);
         }

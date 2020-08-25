@@ -22,4 +22,5 @@ public class CollectionsExample {
         CollectionsExample collectionsExample = new CollectionsExample();
         collectionsExample.removeFromListIfSomeConditionIsTrue();
     }
+
 }

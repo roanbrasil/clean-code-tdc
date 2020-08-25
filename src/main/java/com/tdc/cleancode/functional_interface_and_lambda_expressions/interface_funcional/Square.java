@@ -2,6 +2,5 @@ package com.tdc.cleancode.functional_interface_and_lambda_expressions.interface_
 
 @FunctionalInterface
 public interface Square<T> {
-
     T calculate(T value);
 }

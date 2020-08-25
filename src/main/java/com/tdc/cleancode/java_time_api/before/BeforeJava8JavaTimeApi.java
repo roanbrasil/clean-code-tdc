@@ -1,10 +1,14 @@
 package com.tdc.cleancode.java_time_api.before;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class BeforeJava8JavaTimeApi {
+
+    public static final int ONE_MONTH_TO_ADD = 1;
 
     public Date getCurrentDateTime(){
         return new Date();
@@ -49,5 +53,20 @@ public class BeforeJava8JavaTimeApi {
         System.out.println("Subtracting Hours: " + beforeJava8JavaTimeApi.subtractHours(10));
         System.out.println("Hours Truncated: "+ beforeJava8JavaTimeApi.truncatedTo());
         System.out.println("Span Between Times: "+ beforeJava8JavaTimeApi.spanBetweenTimes());
+    }
+
+    public Calendar createNextMonthCalendar(){
+        Calendar nextMonth = Calendar.getInstance();
+        nextMonth.add(Calendar.MONTH, ONE_MONTH_TO_ADD);
+        return nextMonth;
+    }
+
+    public void exampleBetween(){
+        Calendar myMarriage = Calendar.getInstance();
+        myMarriage.set(2010, Calendar.OCTOBER, 30);
+
+        long diference = myMarriage.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
+        long millisecondsOfDay= 1000 * 60 * 60 * 24;
+        long yearsMarried = diference / millisecondsOfDay;
     }
 }

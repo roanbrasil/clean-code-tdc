@@ -1,5 +1,11 @@
 # Clean Code com Features do Java 8 a Java 14
 
+## What is Clean Code?
+Como próprio livro diz, existem tantas definições quanto programadores.
+Código Limpo é fácil de entender, mais simples de manter e evoluir.
+Ler um código limpo é fácil.
+
+
 ##  default and static methods in Interfaces - Paula
 ###Link : https://openjdk.java.net/jeps/126
 Métodos default possuem implementação dentro de uma interface, são implicitamente públicos como qualquer outro método dentro de uma interface.
@@ -11,7 +17,6 @@ Tem um aumento no acoplamento, porém, esse recurso possui muitas limitações q
 Já métodos estáticos em interface tem como objetivo permitir aumentar o grau de coesão do design, juntando comportamentos relacionados em um único lugar, sem ter que criar um objetos, possibilitando implementação de utilitários por exemplo.
 É possível realizar o mesmo com classes abstratas, porém ambos ainda são diferentes, classes abstratas possuem construtores, permitem ser relacionadas a um estado.
 Devemos apenas nos atentar com conflitos que podem ser gerados através de multiplas interfaces implementadas, em caso delas possuirem default methods com especificações semelhantes.
-
 
 Item do Clean Code que converge com esta feature:
 Capítulo 17 : Cheiros e Heurísticas - G5: Duplicação, G13: Acoplamento Artificial
@@ -26,8 +31,6 @@ Já Lambdas Expressions representam a instância de uma interface funcional.
 
 ###Referências
 https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
-
-##  default and static methods in Interfaces - Paula
  
 ## Java Stream API for Bulk Data Operations on Collections - JEP 107s
 ###Link: https://openjdk.java.net/jeps/107
@@ -101,7 +104,6 @@ O recurso é local no Java, ou seja, somente em escopo pequenos como variáveis 
 Esta feture permite tornar o código mais conciso e legível.
 O objetivo dessa feature é que o uso correto de nomes nas variáveis locais torne mais uma boa prática do que a declaração de seus tipos.
 Seguindo o principio de design o uso da inferência de tipos esta apenas para detalhes de implementação.
-
 
 
 ## Records (Preview) – JEP 359 
