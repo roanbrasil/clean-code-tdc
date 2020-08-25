@@ -1,9 +1,9 @@
 package com.tdc.cleancode.complex.after;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tdc.cleancode.complex.dto.*;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,24 +36,33 @@ public class ComplexMapperCleanCode {
     }
 
     private void fillResponse(final Payment payment, final Complex complex) {
-        final String amountValueType =
+        final String amountValueType = getCurrentPaymentMethod(complex).getAttributeValue();
         complex
                 .getComplexDomainStructure()
                 .getTarget()
                 .getSimpleValueList()
                 .forEach(simpleValue -> {
                     final Debit debit = this.getDebit(payment, simpleValue);
-                    ValueType.findByName()
+
+                    ValueType.findByName(amountValueType).setDebit(debit, simpleValue.getAttributeValue());
                 });
     }
 
     private Debit getDebit(Payment payment, SimpleValue simpleValue){
         return payment.getDebitList()
                 .stream()
-                .filter(debit -> simpleValue.getAttributeName().equals(debit.getPaymentTypeDescription()))
+                .filter(debit -> debit != null && debit.getPaymentTypeDescription().equals(simpleValue.getAttributeName()))
                 .findFirst()
                 .or(() -> debitMapping(payment, simpleValue).get())
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    private SimpleValue getCurrentPaymentMethod(Complex complex){
+        return complex.getComplexDomainStructure().getSimpleValueList()
+                .stream()
+                .filter(simpleValue -> "paymentMethod".equals(simpleValue.getAttributeName()))
+                .findFirst()
+                .orElseThrow();
     }
 
     private Supplier<Optional<Debit>> debitMapping(Payment payment, SimpleValue simpleValue) {
@@ -173,5 +182,10 @@ public class ComplexMapperCleanCode {
         complexDataStreamExample.setCountry("BRA");
         complexDataStreamExample.setComplexGroupList(complexGroups);
 
+        ComplexMapperCleanCode mapperCleanCode = new ComplexMapperCleanCode();
+        Payment payment = mapperCleanCode.fromComplexDataStreamExampleToPayment(complexDataStreamExample, "CREDIT_CARD");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(payment);
+        System.out.println(json);
     }
 }
