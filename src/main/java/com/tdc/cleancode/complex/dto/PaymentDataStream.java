@@ -2,12 +2,12 @@ package com.tdc.cleancode.complex.dto;
 
 import java.util.List;
 
-public class ComplexDataStreamExample {
+public class PaymentDataStream {
 
     private String country;
-    private List<ComplexGroup> complexGroupList;
+    private ComplexGroup complexGroup;
 
-    public ComplexDataStreamExample() {
+    public PaymentDataStream() {
     }
 
     public String getCountry() {
@@ -18,19 +18,19 @@ public class ComplexDataStreamExample {
         this.country = country;
     }
 
-    public List<ComplexGroup> getComplexGroupList() {
-        return complexGroupList;
+    public ComplexGroup getComplexGroup() {
+        return complexGroup;
     }
 
-    public void setComplexGroupList(List<ComplexGroup> complexGroupList) {
-        this.complexGroupList = complexGroupList;
+    public void setComplexGroup(ComplexGroup complexGroup) {
+        this.complexGroup = complexGroup;
     }
 
     @Override
     public String toString() {
         return "ComplexDataStreamExample{" +
                 "country='" + country + '\'' +
-                ", complexGroupList=" + complexGroupList +
+                ", complexGroup=" + complexGroup +
                 '}';
     }
 }

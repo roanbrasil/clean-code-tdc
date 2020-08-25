@@ -2,32 +2,32 @@ package com.tdc.cleancode.complex.after;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tdc.cleancode.complex.builder.DebitBuilder;
 import com.tdc.cleancode.complex.dto.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ComplexMapperCleanCode {
+public class PaymentMapper {
 
 
     public Payment fromComplexDataStreamExampleToPayment(
-            final ComplexDataStreamExample response, final String paymentMethodToSearch){
+            final PaymentDataStream response, final String paymentMethodToSearch){
 
         var payment = new Payment();
         payment.setPaymentMethod(PaymentMethod.valueOf(paymentMethodToSearch));
 
-        final List<Complex> complexList = response.getComplexGroupList().get(0).getComplexList();
+        final List<Complex> complexes = response.getComplexGroup().getComplexes();
 
-        final List<Complex> complexListFilteredByPaymentMethod = complexList
+        final List<Complex> complexesFilteredByPaymentMethod = complexes
                 .stream()
-                .filter(complexFilterByPaymentMethod(paymentMethodToSearch))
+                .filter(byPaymentMethod(paymentMethodToSearch))
                 .collect(Collectors.toList());
 
 
-        complexListFilteredByPaymentMethod
+        complexesFilteredByPaymentMethod
                 .forEach(complex -> fillPayment(payment, complex));
 
         return payment;
@@ -36,32 +36,27 @@ public class ComplexMapperCleanCode {
     private void fillPayment(final Payment payment, final Complex complex) {
         final String paymentTypeDescription = getCurrentPaymentMethod(complex).getAttributeValue();
 
-        final List<SimpleValue> simpleValueListFromTarget = complex.getComplexDomainStructure()
+        final List<SimpleValue> simpleValuesFromTarget = complex.getComplexDomainStructure()
                 .getTarget()
-                .getSimpleValueList();
+                .getSimpleValues();
 
-        final Debit debit = new Debit();
-        debit.setPaymentTypeDescription(paymentTypeDescription);
+        final Debit debit = new DebitBuilder(paymentTypeDescription)
+                .fillDebit(simpleValuesFromTarget)
+                .build();
 
-        simpleValueListFromTarget
-                .forEach(simpleValue ->
-                    ValueType.findByName(simpleValue.getAttributeName())
-                            .setDebit(debit, simpleValue.getAttributeValue())
-                );
-
-        payment.getDebitList().add(debit);
+        payment.add(debit);
     }
 
     private SimpleValue getCurrentPaymentMethod(Complex complex){
-        return complex.getComplexDomainStructure().getSimpleValueList()
+        return complex.getComplexDomainStructure().getSimpleValues()
                 .stream()
                 .filter(simpleValue -> "paymentMethod".equals(simpleValue.getAttributeName()))
                 .findFirst()
                 .orElseThrow();
     }
 
-    private Predicate<Complex> complexFilterByPaymentMethod(String paymentMethodToSearch){
-        return complex -> complex.getComplexDomainStructure().getSimpleValueList()
+    private Predicate<Complex> byPaymentMethod(String paymentMethodToSearch){
+        return complex -> complex.getComplexDomainStructure().getSimpleValues()
                 .stream()
                 .anyMatch(simpleValue ->
                         "billType".equalsIgnoreCase(simpleValue.getAttributeName())
@@ -87,7 +82,7 @@ public class ComplexMapperCleanCode {
         Target target1 = new Target();
         target1.setId(54321L);
         target1.setName("billType");
-        target1.setSimpleValueList(valueTypeValueList1);
+        target1.setSimpleValues(valueTypeValueList1);
 
         SimpleValue complexDomainStructureSimpleValue1 = new SimpleValue("billType", "CREDIT_CARD");
         SimpleValue complexDomainStructureSimpleValue2 = new SimpleValue("paymentMethod", "INSTALLMENT");
@@ -95,7 +90,7 @@ public class ComplexMapperCleanCode {
 
         ComplexDomainStructure complexDomainStructure1 = new ComplexDomainStructure();
         complexDomainStructure1.setId(123456L);
-        complexDomainStructure1.setSimpleValueList(complexDomainStructureSimpleValueList1);
+        complexDomainStructure1.setSimpleValues(complexDomainStructureSimpleValueList1);
         complexDomainStructure1.setTarget(target1);
 
         Complex complex1 = new Complex();
@@ -114,7 +109,7 @@ public class ComplexMapperCleanCode {
         Target target2 = new Target();
         target2.setId(54321L);
         target2.setName("billType");
-        target2.setSimpleValueList(valueTypeValueList2);
+        target2.setSimpleValues(valueTypeValueList2);
 
         SimpleValue complexDomainStructureSimpleValue3 = new SimpleValue("billType", "CREDIT_CARD");
         SimpleValue complexDomainStructureSimpleValue4 = new SimpleValue("paymentMethod", "CASH_VALUE");
@@ -122,7 +117,7 @@ public class ComplexMapperCleanCode {
 
         ComplexDomainStructure complexDomainStructure2 = new ComplexDomainStructure();
         complexDomainStructure2.setId(123456L);
-        complexDomainStructure2.setSimpleValueList(complexDomainStructureSimpleValueList2);
+        complexDomainStructure2.setSimpleValues(complexDomainStructureSimpleValueList2);
         complexDomainStructure2.setTarget(target2);
 
         Complex complex2 = new Complex();
@@ -139,7 +134,7 @@ public class ComplexMapperCleanCode {
         Target target3 = new Target();
         target3.setId(54321L);
         target3.setName("billType");
-        target3.setSimpleValueList(valueTypeValueList3);
+        target3.setSimpleValues(valueTypeValueList3);
 
         SimpleValue complexDomainStructureSimpleValue5 = new SimpleValue("billType", "LOAN");
         SimpleValue complexDomainStructureSimpleValue6 = new SimpleValue("paymentMethod", "INSTALLMENT");
@@ -147,7 +142,7 @@ public class ComplexMapperCleanCode {
 
         ComplexDomainStructure complexDomainStructure3 = new ComplexDomainStructure();
         complexDomainStructure3.setId(123456L);
-        complexDomainStructure3.setSimpleValueList(complexDomainStructureSimpleValueList3);
+        complexDomainStructure3.setSimpleValues(complexDomainStructureSimpleValueList3);
         complexDomainStructure3.setTarget(target3);
 
         Complex complex3 = new Complex();
@@ -159,17 +154,14 @@ public class ComplexMapperCleanCode {
 
         ComplexGroup complexGroup = new ComplexGroup();
         complexGroup.setListName("TDC-Stream-Example");
-        complexGroup.setComplexList(complexList);
+        complexGroup.setComplexes(complexList);
 
-        List<ComplexGroup> complexGroups = new ArrayList<>();
-        complexGroups.add(complexGroup);
+        PaymentDataStream paymentDataStream = new PaymentDataStream();
+        paymentDataStream.setCountry("BRA");
+        paymentDataStream.setComplexGroup(complexGroup);
 
-        ComplexDataStreamExample complexDataStreamExample = new ComplexDataStreamExample();
-        complexDataStreamExample.setCountry("BRA");
-        complexDataStreamExample.setComplexGroupList(complexGroups);
-
-        ComplexMapperCleanCode mapperCleanCode = new ComplexMapperCleanCode();
-        Payment payment = mapperCleanCode.fromComplexDataStreamExampleToPayment(complexDataStreamExample, "CREDIT_CARD");
+        PaymentMapper mapperCleanCode = new PaymentMapper();
+        Payment payment = mapperCleanCode.fromComplexDataStreamExampleToPayment(paymentDataStream, "CREDIT_CARD");
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(payment);
         System.out.println(json);

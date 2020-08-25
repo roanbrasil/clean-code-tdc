@@ -5,7 +5,7 @@ import java.util.List;
 public class ComplexGroup {
 
     private String listName;
-    private List<Complex> complexList;
+    private List<Complex> complexes;
 
     public ComplexGroup() {
     }
@@ -18,19 +18,19 @@ public class ComplexGroup {
         this.listName = listName;
     }
 
-    public List<Complex> getComplexList() {
-        return complexList;
+    public List<Complex> getComplexes() {
+        return complexes;
     }
 
-    public void setComplexList(List<Complex> complexList) {
-        this.complexList = complexList;
+    public void setComplexes(List<Complex> complexes) {
+        this.complexes = complexes;
     }
 
     @Override
     public String toString() {
         return "ComplexGroup{" +
                 "listName='" + listName + '\'' +
-                ", complexList=" + complexList +
+                ", complexList=" + complexes +
                 '}';
     }
 }

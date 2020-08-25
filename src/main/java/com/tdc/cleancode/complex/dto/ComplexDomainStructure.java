@@ -5,7 +5,7 @@ import java.util.List;
 public class ComplexDomainStructure {
 
     private Long id;
-    private List<SimpleValue> simpleValueList;
+    private List<SimpleValue> simpleValues;
     private Target target;
 
     public ComplexDomainStructure() {
@@ -19,12 +19,12 @@ public class ComplexDomainStructure {
         this.id = id;
     }
 
-    public List<SimpleValue> getSimpleValueList() {
-        return simpleValueList;
+    public List<SimpleValue> getSimpleValues() {
+        return simpleValues;
     }
 
-    public void setSimpleValueList(List<SimpleValue> simpleValueList) {
-        this.simpleValueList = simpleValueList;
+    public void setSimpleValues(List<SimpleValue> simpleValues) {
+        this.simpleValues = simpleValues;
     }
 
     public Target getTarget() {
@@ -39,7 +39,7 @@ public class ComplexDomainStructure {
     public String toString() {
         return "ComplexDomainStructure{" +
                 "id=" + id +
-                ", simpleValueList=" + simpleValueList +
+                ", simpleValues=" + simpleValues +
                 ", target=" + target +
                 '}';
     }

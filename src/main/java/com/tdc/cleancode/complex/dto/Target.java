@@ -7,7 +7,7 @@ public class Target {
 
     private Long id;
     private String name;
-    private List<SimpleValue> simpleValueList;
+    private List<SimpleValue> simpleValues;
 
     public Target() {
     }
@@ -28,12 +28,12 @@ public class Target {
         this.name = name;
     }
 
-    public List<SimpleValue> getSimpleValueList() {
-        return simpleValueList;
+    public List<SimpleValue> getSimpleValues() {
+        return simpleValues;
     }
 
-    public void setSimpleValueList(List<SimpleValue> simpleValueList) {
-        this.simpleValueList = simpleValueList;
+    public void setSimpleValues(List<SimpleValue> simpleValues) {
+        this.simpleValues = simpleValues;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Target {
         return "Target{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", simpleValueList=" + simpleValueList +
+                ", simpleValueList=" + simpleValues +
                 '}';
     }
 }
