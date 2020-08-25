@@ -1,11 +1,12 @@
 package com.tdc.cleancode.complex.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Payment {
 
     private PaymentMethod paymentMethod;
-    private List<Debit> debitList;
+    private List<Debit> debitList = new ArrayList<>();
 
     public Payment() {
     }

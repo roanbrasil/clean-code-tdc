@@ -7,6 +7,7 @@ import com.tdc.cleancode.complex.dto.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -32,29 +33,35 @@ public class ComplexMapperCleanCode {
         complexListFiltered
                 .forEach(complex -> fillResponse(payment, complex));
 
-        return null;
+        return payment;
     }
 
     private void fillResponse(final Payment payment, final Complex complex) {
-        final String amountValueType = getCurrentPaymentMethod(complex).getAttributeValue();
-        complex
-                .getComplexDomainStructure()
-                .getTarget()
-                .getSimpleValueList()
-                .forEach(simpleValue -> {
-                    final Debit debit = this.getDebit(payment, simpleValue);
+        final String paymentTypeDescription = getCurrentPaymentMethod(complex).getAttributeValue();
 
-                    ValueType.findByName(amountValueType).setDebit(debit, simpleValue.getAttributeValue());
+        final List<SimpleValue> simpleValueListFromTarget = complex.getComplexDomainStructure()
+                .getTarget()
+                .getSimpleValueList();
+        Debit debit = new Debit();
+        debit.setPaymentTypeDescription(paymentTypeDescription);
+        simpleValueListFromTarget
+                .forEach(simpleValue -> {
+
+//                    final Debit debit = this.getDebit(payment, simpleValue, amountValueType);
+//
+                    ValueType.findByName(simpleValue.getAttributeName()).setDebit(debit, simpleValue.getAttributeValue());
                 });
+
+        payment.getDebitList().add(debit);
     }
 
-    private Debit getDebit(Payment payment, SimpleValue simpleValue){
+    private Debit getDebit(Payment payment, SimpleValue simpleValue, String amountValueType){
         return payment.getDebitList()
                 .stream()
-                .filter(debit -> debit != null && debit.getPaymentTypeDescription().equals(simpleValue.getAttributeName()))
+                .filter(debit ->  debit.getPaymentTypeDescription().equals(simpleValue.getAttributeName()))
                 .findFirst()
-                .or(() -> debitMapping(payment, simpleValue).get())
-                .orElseThrow(IllegalArgumentException::new);
+                .or(() -> debitMapping(payment, amountValueType).get())
+                .orElse(new Debit());
     }
 
     private SimpleValue getCurrentPaymentMethod(Complex complex){
@@ -65,10 +72,10 @@ public class ComplexMapperCleanCode {
                 .orElseThrow();
     }
 
-    private Supplier<Optional<Debit>> debitMapping(Payment payment, SimpleValue simpleValue) {
+    private Supplier<Optional<Debit>> debitMapping(Payment payment, String amountValueType) {
         return () -> {
             final Debit debit = new Debit();
-            debit.setPaymentTypeDescription(simpleValue.getAttributeName());
+            debit.setPaymentTypeDescription(amountValueType);
             payment.getDebitList().add(debit);
             return Optional.ofNullable(debit);
         };
